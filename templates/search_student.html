@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<link rel="stylesheet" href="/static/style.css">
+
+<style>
+
+table{
+margin:auto;
+margin-top:30px;
+border-collapse:collapse;
+background:white;
+}
+
+th,td{
+border:1px solid black;
+padding:10px 20px;
+text-align:center;
+}
+
+</style>
+
+</head>
+
+<body class="bg-image">
+
+<div class="container">
+
+<h2>SEARCH STUDENT</h2>
+
+<form method="POST">
+
+<label>Select Class</label>
+
+<select name="class" required>
+
+<option value="">Select Class</option>
+
+{% for c in classes %}
+<option value="{{c}}">{{c}}</option>
+{% endfor %}
+
+</select>
+
+<br><br>
+
+<label>Enter Roll OR Name</label>
+
+<input type="text" name="keyword" placeholder="Roll or Name">
+
+<br><br>
+
+<button type="submit">Search</button>
+
+</form>
+
+{% if students %}
+
+<table>
+
+<tr>
+<th>Roll</th>
+<th>Name</th>
+<th>Class</th>
+</tr>
+
+{% for s in students %}
+
+<tr>
+
+<td>{{s.roll}}</td>
+<td>{{s.name}}</td>
+<td>{{s.class}}</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+{% endif %}
+
+<br>
+
+<br>
+
+<a href="/start">
+<button>BACK</button>
+</a>
+
+</div>
+
+</body>
+
+</html>

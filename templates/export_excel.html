@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body class="bg-image">
+<div class="container">
+<h2>EXPORT STUDENT LIST TO EXCEL</h2>
+<form method="POST">
+<label>Select Class</label>
+<select name="class" required>
+<option value="">Select Class</option>
+{% for c in classes %}
+<option value="{{c}}">{{c}}</option>
+{% endfor %}
+</select>
+<br><br>
+<button type="submit">Download Excel</button>
+</form>
+<br>
+<a href="/attendance">
+<button>BACK</button>
+</a>
+</div>
+</body>
+</html>

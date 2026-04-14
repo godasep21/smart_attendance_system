@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<link rel="stylesheet" href="/static/style.css">
+
+</head>
+
+<body class="bg-image">
+
+<div class="container">
+
+<h2>Student Performance</h2>
+
+<form method="POST">
+
+Select Class
+
+<select name="class" required>
+
+<option value="">Select Class</option>
+
+{% for c in classes %}
+<option value="{{c}}">{{c}}</option>
+{% endfor %}
+
+</select>
+
+<br><br>
+
+Select Date
+
+<input type="date" name="date" required>
+
+<br><br>
+
+<button type="submit">Show</button>
+
+</form>
+
+<br>
+
+{% if show_chart %}
+
+<canvas id="chart" width="300" height="300"></canvas>
+
+<script>
+
+var ctx=document.getElementById("chart")
+
+new Chart(ctx,{
+
+type:"pie",
+
+data:{
+
+labels:["Present","Absent"],
+
+datasets:[{
+
+data:[{{present}},{{absent}}],
+backgroundColor:["green","red"]
+
+}]
+
+}
+
+})
+
+</script>
+
+{% endif %}
+
+<br>
+
+<a href="/">
+<button>Back</button>
+</a>
+
+</div>
+
+</body>
+</html>

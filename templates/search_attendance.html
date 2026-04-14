@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<link rel="stylesheet" href="/static/style.css">
+
+<style>
+
+table{
+margin:auto;
+margin-top:30px;
+border-collapse:collapse;
+background:white;
+}
+
+th,td{
+border:1px solid black;
+padding:10px 20px;
+text-align:center;
+}
+
+.present{
+color:green;
+font-weight:bold;
+}
+
+.absent{
+color:red;
+font-weight:bold;
+}
+
+.message{
+text-align:center;
+margin-top:30px;
+font-size:18px;
+font-weight:bold;
+color:red;
+}
+
+.summary{
+text-align:center;
+margin-top:20px;
+font-size:18px;
+font-weight:bold;
+}
+
+</style>
+
+</head>
+
+<body class="bg-image">
+
+<div class="container">
+
+<h2>SEARCH ATTENDANCE</h2>
+
+<form method="POST">
+
+<label>Select Class</label>
+
+<select name="class" required>
+
+<option value="">Select Class</option>
+
+{% for c in classes %}
+<option value="{{c}}">{{c}}</option>
+{% endfor %}
+
+</select>
+
+<label>Select Date</label>
+
+<input type="date" name="date">
+
+<button type="submit">Search</button>
+
+</form>
+
+{% if data %}
+
+<div class="summary">
+
+Total Present :
+{{ data | selectattr('status','equalto','Present') | list | length }}
+
+&nbsp;&nbsp;&nbsp;
+
+Total Absent :
+{{ data | selectattr('status','equalto','Absent') | list | length }}
+
+</div>
+
+<table>
+
+<tr>
+
+<th>Roll</th>
+<th>Name</th>
+<th>Class</th>
+<th>Attendance</th>
+<th>Attendance Taken By</th>
+<th>Date</th>
+
+</tr>
+
+{% for row in data %}
+
+<tr>
+
+<td>{{row.roll}}</td>
+<td>{{row.name}}</td>
+<td>{{row.class}}</td>
+
+<td class="{% if row.status|lower == 'present' %}present{% else %}absent{% endif %}">
+{{row.status}}
+</td>
+
+<td>{{row.staff}}</td>
+
+<td>{{row.date}}</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+{% elif request.method == "POST" %}
+
+<div class="message">
+Attendance not marked on this date
+</div>
+
+{% endif %}
+
+<br>
+
+<a href="/attendance">
+<button>BACK</button>
+</a>
+
+</div>
+
+</body>
+</html>

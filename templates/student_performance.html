@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="/static/style.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+.center{
+text-align:center;
+}
+#chartBox{
+width:350px;
+margin:auto;
+margin-top:30px;
+}
+</style>
+</head>
+<body class="bg-image">
+<div class="container center">
+<h2>Student Performance</h2>
+<h3>Name : {{name}}</h3>
+<h3>Roll : {{roll}}</h3>
+<h3>Attendance : {{percent}} %</h3>
+<h3>Marks : {{marks}} / 30</h3>
+<div id="chartBox">
+<canvas id="chart"></canvas>
+</div>
+<script>
+var ctx=document.getElementById("chart");
+new Chart(ctx,{
+type:"pie",
+data:{
+labels:["Present","Absent"],
+datasets:[{
+data:[{{present}},{{absent}}],
+backgroundColor:["green","red"]
+}]
+}
+});
+</script>
+<br><br>
+<a href="/year_report">
+<button class="button-blue">BACK</button>
+</a>
+</div>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<html>
+<head>
+<link rel="stylesheet" href="/static/style.css">
+<script>
+function validate(){
+let name=document.getElementById("name").value
+let roll=document.getElementById("roll").value
+if(!/^[A-Za-z ]+$/.test(name)){
+alert("Name only letters allowed")
+return false
+}
+if(!/^[0-9]+$/.test(roll)){
+alert("Roll only numbers allowed")
+return false
+}
+return true
+}
+</script>
+</head>
+<body>
+<div class="container">
+<h2>Add Student</h2>
+<form method="POST" onsubmit="return validate()">
+<select name="class">
+{% for c in classes %}
+<option>{{c}}</option>
+{% endfor %}
+</select>
+<br>
+<input id="name" name="name" placeholder="Student Name">
+<br>
+<input id="roll" name="roll" placeholder="Roll Number">
+<br>
+<button>Add Student</button>
+</form>
+<a href="/student_list"><button>Student List</button></a>
+<a href="/student_history"><button>Student Add History</button></a>
+<a href="/"><button>Back</button></a>
+</div>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<html>
+<head>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+ 
+<body>
+
+<div class="container">
+
+<h2>Staff Login</h2>
+
+<form method="POST">
+
+<select name="staff">
+
+{% for s in staff %}
+<option value="{{s.id}}">{{s.name}}</option>
+{% endfor %}
+
+</select>
+
+<br>
+
+<input type="password" name="password">
+
+<br>
+
+<button>Login</button>
+
+</form>
+
+<a href="/"><button>Back</button></a>
+
+</div>
+
+</body>
+</html>

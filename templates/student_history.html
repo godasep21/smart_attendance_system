@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<link rel="stylesheet" href="/static/style.css">
+<title>Student History</title>
+
+<style>
+
+.center-box{
+text-align:center;
+margin-top:20px;
+}
+
+table{
+margin:auto;
+margin-top:20px;
+border-collapse:collapse;
+background:white;
+}
+
+th,td{
+border:1px solid black;
+padding:10px 20px;
+text-align:center;
+}
+
+</style>
+
+</head>
+
+<body class="bg-image">
+
+<div class="center-box">
+
+<h2>STUDENT HISTORY</h2>
+
+<a href="/">
+<button class="button-blue">BACK</button>
+</a>
+
+</div>
+
+{% for c in range(5,13) %}
+
+<h3 style="text-align:center">Class {{c}}</h3>
+
+<table>
+
+<tr>
+<th>Roll Number</th>
+<th>Name</th>
+<th>Date</th>
+<th>Class</th>
+<th>Delete</th>
+</tr>
+
+{% for h in history %}
+
+{% if h.class|int == c %}
+
+<tr>
+<td>{{ h.roll }}</td>
+<td>{{ h.name }}</td>
+<td>{{ h.date }}</td>
+<td>{{ h.class }}</td>
+
+<td>
+
+<form method="POST" action="/delete_student_history/{{ h.class }}/{{ h.roll }}" 
+onsubmit="return confirm('Delete this student?')">
+
+<button type="submit">Delete</button>
+
+</form>
+
+</td>
+
+</tr>
+
+{% endif %}
+
+{% endfor %}
+
+</table>
+
+<br><br>
+
+{% endfor %}
+
+
+
+</body>
+</html>

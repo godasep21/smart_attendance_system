@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <link rel="stylesheet" href="/static/style.css">
+<title>Show Attendance</title>
+<style>
+.center-box{
+text-align:center;
+margin-top:20px;
+}
+table{
+margin:auto;
+margin-top:15px;
+border-collapse:collapse;
+background:white;
+}
+th,td{
+border:1px solid black;
+padding:10px 20px;
+text-align:center;
+}
+.staff-title{
+text-align:center;
+margin-top:30px;
+font-weight:bold;
+font-size:18px;
+}
+</style>
+</head>
+<body class="bg-image">
+<div class="container">
+<h2 class="center-box">SHOW ATTENDANCE</h2>
+<form method="POST" style="text-align:center">
+<select name="class" required>
+<option value="">Select Class</option>
+{% for c in classes %}
+<option value="{{c}}"
+{% if selected_class==c|string %}selected{% endif %}>
+Class {{c}}
+</option>
+{% endfor %}
+</select>
+<input type="date" name="date" value="{{selected_date}}" required>
+<button type="submit">
+Show Attendance
+</button>
+</form>
+<br>
+<a href="/">
+<button class="button-blue">
+Back
+</button>
+</a>
+</div>
+{% if staff_tables %}
+{% for staff,data in staff_tables.items() %}
+<div class="staff-title">
+Attendance Taken By : {{staff}}
+</div>
+<table>
+<tr>
+<th>Roll Number</th>
+<th>Name</th>
+<th>Status</th>
+</tr>
+{% for s in data %}
+<tr>
+<td>{{s.roll}}</td>
+<td>{{s.name}}</td>
+<td>{{s.status}}</td>
+</tr>
+{% endfor %}
+</table>
+{% endfor %}
+{% else %}
+<p style="text-align:center;margin-top:20px;color:white;">
+No Attendance Found
+</p>
+{% endif %}
+</body>
+</html>
