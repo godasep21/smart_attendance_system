@@ -1,0 +1,50 @@
+{
+    "2026-04-10": {
+        "1_Dhanaji Ankush Raut": {
+            "status": "Present",
+            "staff": "Dhanaji Ankush Raut"
+        },
+        "2_Dhanaji Ankush Raut": {
+            "status": "Present",
+            "staff": "Dhanaji Ankush Raut"
+        },
+        "3_Dhanaji Ankush Raut": {
+            "status": "Present",
+            "staff": "Dhanaji Ankush Raut"
+        },
+        "4_Dhanaji Ankush Raut": {
+            "status": "Present",
+            "staff": "Dhanaji Ankush Raut"
+        },
+        "5_Dhanaji Ankush Raut": {
+            "status": "Present",
+            "staff": "Dhanaji Ankush Raut"
+        },
+        "1_Shital Sagar Khule": {
+            "status": "Absent",
+            "staff": "Shital Sagar Khule"
+        },
+        "2_Shital Sagar Khule": {
+            "status": "Present",
+            "staff": "Shital Sagar Khule"
+        },
+        "3_Shital Sagar Khule": {
+            "status": "Absent",
+            "staff": "Shital Sagar Khule"
+        },
+        "4_Shital Sagar Khule": {
+            "status": "Absent",
+            "staff": "Shital Sagar Khule"
+        },
+        "5_Shital Sagar Khule": {
+            "status": "Absent",
+            "staff": "Shital Sagar Khule"
+        }
+    },
+    "2026-04-13": {
+        "3_Shital Sagar Khule": {
+            "status": "Present",
+            "staff": "Shital Sagar Khule"
+        }
+    }
+}
