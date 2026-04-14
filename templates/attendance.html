@@ -1,59 +1,123 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <title>Attendance</title>
-    <link rel="stylesheet" href="/static/style.css">
+<link rel="stylesheet" href="/static/style.css">
+
+<style>
+
+.present-btn{
+background:green;
+color:white;
+border:none;
+padding:6px 12px;
+cursor:pointer;
+}
+
+.absent-btn{
+background:red;
+color:white;
+border:none;
+padding:6px 12px;
+cursor:pointer;
+}
+
+.center-btn{
+text-align:center;
+margin-top:20px;
+}
+
+</style>
+
+<script>
+
+function markAllPresent(){
+
+let radios = document.querySelectorAll('input[value="Present"]');
+
+radios.forEach(function(r){
+r.checked = true;
+});
+
+}
+
+</script>
+
 </head>
 
 <body>
 
-<h2 style="text-align:center;">Student Attendance</h2>
+<div class="container">
 
+<div class="center-btn">
+<a href="/my_attendance">
+<button>Show My Attendance</button>
+</a>
+</div>
+
+<h2>MARK ATTENDANCE</h2>
+<h3>Attendance Taken By : {{staff_name}}</h3>
 <form method="POST">
-
-<table>
-    <tr>
-        <th>Roll No</th>
-        <th>Name</th>
-        <th>Status</th>
-    </tr>
-
-    {% for student in students %}
-    <tr class="{% if student.status == 'Absent' %}absent{% else %}present{% endif %}">
-        
-        <td>{{ student.roll }}</td>
-        <td>{{ student.name }}</td>
-
-        <td>
-            <select name="status_{{ student.roll }}">
-                <option value="Present" {% if student.status == 'Present' %}selected{% endif %}>Present</option>
-                <option value="Absent" {% if student.status == 'Absent' %}selected{% endif %}>Absent</option>
-            </select>
-        </td>
-
-    </tr>
-    {% endfor %}
-</table>
-
-<button type="submit">Save Attendance</button>
-
+<label>Select Class</label>
+<br><br>
+<select name="class" onchange="this.form.submit()">
+<option value="">Select Class</option>
+{% for c in classes %}
+<option value="{{c}}" {% if selected_class==c|string %}selected{% endif %}>
+{{c}}
+</option>
+{% endfor %}
+</select>
 </form>
-
-<script>
-document.querySelectorAll("select").forEach(select => {
-    select.addEventListener("change", function() {
-        let row = this.closest("tr");
-        
-        if (this.value === "Absent") {
-            row.classList.add("absent");
-            row.classList.remove("present");
-        } else {
-            row.classList.add("present");
-            row.classList.remove("absent");
-        }
-    });
-});
-</script>
-
+{% if students %}
+<br>
+<form method="POST">
+<input type="hidden" name="class" value="{{selected_class}}">
+<div class="center-btn">
+<button type="button" onclick="markAllPresent()">MARK ALL PRESENT</button>
+</div>
+<br>
+<table border="1" cellpadding="10" align="center">
+<tr>
+<th>Roll</th>
+<th>Name</th>
+<th>Present</th>
+<th>Absent</th>
+</tr>
+{% for s in students %}
+<tr>
+<td>{{s.roll}}</td>
+<td>{{s.name}}</td>
+<td align="center">
+<label class="present-btn">
+<input type="radio" name="att_{{s.roll}}" value="Present" checked hidden>
+Present
+</label>
+</td>
+<td align="center">
+<label class="absent-btn">
+<input type="radio" name="att_{{s.roll}}" value="Absent" hidden>
+Absent
+</label>
+</td>
+</tr>
+{% endfor %}
+</table>
+<br>
+<button type="submit" name="save_attendance">
+SAVE ATTENDANCE
+</button>
+{% if message %}
+<div class="success-msg">
+Attendance Saved Successfully ✔
+</div>
+{% endif %}
+</form>
+{% endif %}
+<br>
+<a href="/">
+<button>BACK</button>
+</a>
+</div>
 </body>
 </html>
