@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="/static/style.css">
+<style>
+table{
+margin:auto;
+margin-top:25px;
+border-collapse:collapse;
+background:white;
+}
+th,td{
+border:1px solid black;
+padding:10px 20px;
+text-align:center;
+}
+.msg{
+color:red;
+font-weight:bold;
+text-align:center;
+margin-top:10px;
+}
+.delete-btn{
+background:red;
+color:white;
+border:none;
+padding:6px 12px;
+cursor:pointer;
+}
+</style>
+</head>
+<body class="bg-image">
+<div class="container">
+<h2>Add Staff</h2>
+<form method="POST">
+<input name="name" placeholder="Staff Name" pattern="[A-Za-z ]+" title="Only letters allowed" required>
+<br><br>
+<button type="submit">
+Add Staff
+</button>
+</form>
+{% if msg %}
+<div class="msg">
+{{msg}}
+</div>
+{% endif %}
+<table>
+<tr>
+<th>ID</th>
+<th>Name</th>
+<th>Delete</th>
+</tr>
+{% for s in staff %}
+<tr>
+<td>{{s["id"]}}</td>
+<td>{{s["name"]}}</td>
+<td>
+<form action="/delete_staff/{{s['id']}}" method="POST">
+<button class="delete-btn" onclick="return confirm('Delete this staff?')">
+Delete
+</button>
+</form>
+</td>
+</tr>
+{% endfor %}
+</table>
+<br>
+<a href="/">
+<button>
+Back
+</button>
+</a>
+</div>
+</body>
+</html>
